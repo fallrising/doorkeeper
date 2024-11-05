@@ -20,6 +20,7 @@ export async function registerService(context: Context) {
     };
     context.response.body = { message: "Service registered successfully" };
   } catch (error) {
+    console.error("Error registering service:", error);
     context.response.status = 400;
     context.response.body = { error: "Invalid request format" };
   }

@@ -1,8 +1,14 @@
 #!/bin/bash
 
 # Configuration
-BASE_URL="http://localhost:8000"
-AUTH_TOKEN="your-secret-token"  # Replace with your actual auth token
+BASE_URL="https://doorkeeper-10086.deno.dev"
+
+# Check if AUTH_TOKEN is set in environment
+if [ -z "$AUTH_TOKEN" ]; then
+    echo "Error: AUTH_TOKEN environment variable is not set"
+    echo "Please set it using: export AUTH_TOKEN=your-secret-token"
+    exit 1
+fi
 
 # Colors for output
 GREEN='\033[0;32m'

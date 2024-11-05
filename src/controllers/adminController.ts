@@ -6,6 +6,7 @@ export async function purgeAllServices(context: Context) {
         await purgeServices();
         context.response.body = { message: "All services purged successfully" };
     } catch (error) {
+        console.error("Purged but error occur", error);
         context.response.status = 500;
         context.response.body = { error: "Failed to purge services" };
     }

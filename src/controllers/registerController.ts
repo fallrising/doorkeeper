@@ -9,12 +9,14 @@ export async function registerService(context: Context) {
       context.response.body = { error: "Missing request body" };
       return;
     }
+
     const { ID, Name, Address, Port, Tags, Check } = body;
-    if (!ID || !Name || !Address || !Port) {
+    if (!Name || !Address || !Port) {
       context.response.status = 400;
       context.response.body = { error: "Missing required fields" };
       return;
     }
+
     const serviceData = {
       name: Name,
       domain: Address,
@@ -26,8 +28,11 @@ export async function registerService(context: Context) {
       lastChecked: null
     };
 
-    await saveService(ID, serviceData);
-    context.response.body = { message: "Service registered successfully" };
+    const serviceId = await saveService(ID, serviceData);
+    context.response.body = {
+      message: "Service registered successfully",
+      serviceId
+    };
   } catch (error) {
     console.error("Error registering service:", error);
     context.response.status = 400;

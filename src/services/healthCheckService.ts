@@ -1,11 +1,10 @@
 import { HEALTH_CHECK_INTERVAL } from "../config.ts";
 import { log } from "../utils/logger.ts";
-
-export const services: Record<string, { name: string, domain: string; port: number; tags: string[]; status: string; checkType: string; checkURL: string; lastChecked: Date | null }> = {};
+import {getAllServices} from "./dataService.ts";
 
 export async function performHealthCheck() {
   while (true) {
-    const healthChecks = Object.entries(services).map(async ([id, service]) => {
+    const healthChecks = Object.entries(getAllServices()).map(async ([id, service]) => {
       try {
         if (service.checkType === "http") {
           const response = await fetch(service.checkURL);

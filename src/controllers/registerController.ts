@@ -1,5 +1,5 @@
 import { Context } from "https://deno.land/x/oak@v17.1.3/mod.ts";
-import { services } from "../services/healthCheckService.ts";
+import { saveService } from '../services/dataService.ts';
 
 export async function registerService(context: Context) {
   try {
@@ -15,7 +15,7 @@ export async function registerService(context: Context) {
       context.response.body = { error: "Missing required fields" };
       return;
     }
-    services[ID] = {
+    const serviceData = {
       name: Name,
       domain: Address,
       port: Port,
@@ -25,6 +25,8 @@ export async function registerService(context: Context) {
       checkURL: Check?.HTTP || `http://${Address}:${Port}/health`,
       lastChecked: null
     };
+
+    await saveService(ID, serviceData);
     context.response.body = { message: "Service registered successfully" };
   } catch (error) {
     console.error("Error registering service:", error);

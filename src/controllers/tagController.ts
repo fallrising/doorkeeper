@@ -1,9 +1,9 @@
 import { Context } from "https://deno.land/x/oak@v17.1.3/mod.ts";
-import { services } from "../services/healthCheckService.ts";
+import {getAllServices} from "../services/dataService.ts";
 
 export function getServicesByTag(context: Context) {
     const tag = decodeURIComponent(context.params.tag || "");
-    const serviceList = Object.entries(services).filter(
+    const serviceList = Object.entries(getAllServices()).filter(
         ([, service]) => service.tags.includes(tag)
     );
 

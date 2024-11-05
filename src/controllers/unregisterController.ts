@@ -1,10 +1,16 @@
 import { Context } from "https://deno.land/x/oak@v17.1.3/mod.ts";
-import { services } from "../services/healthCheckService.ts";
+import { deleteService } from '../services/dataService.ts';
 
-export function unregisterService(context: Context) {
+export async function unregisterService(context: Context) {
   const serviceID = context.params.service_id;
-  if (services[serviceID]) {
-    delete services[serviceID];
+  if (!serviceID) {
+    context.response.status = 400;
+    context.response.body = { error: "Missing service ID in request" };
+    return;
+  }
+
+  const result = await deleteService(serviceID);
+  if (result) {
     context.response.body = { message: "Service unregistered successfully" };
   } else {
     context.response.status = 404;

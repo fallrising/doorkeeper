@@ -3,7 +3,8 @@ import { services } from "../services/healthCheckService.ts";
 
 export async function registerService(context: Context) {
   try {
-    const { ID, Name, Address, Port, Tags, Check } = await context.request.body().value;
+    const body = await context.request.body({ type: "json" }).value;
+    const { ID, Name, Address, Port, Tags, Check } = body;
     if (!ID || !Name || !Address || !Port) {
       context.response.status = 400;
       context.response.body = { error: "Missing required fields" };

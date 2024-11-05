@@ -3,7 +3,6 @@
     "lib": ["deno.ns", "deno.window", "dom"],
     "strict": true
   },
-  "importMap": "./import_map.json",
   "tasks": {
     "start": "deno run --allow-net --allow-read src/app.ts",
     "test": "deno test --allow-net --allow-read"

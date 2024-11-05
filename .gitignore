@@ -6,6 +6,7 @@ deno_dir/
 
 # Ignore log files
 *.log
+*.txt
 
 # Ignore test coverage output
 coverage/

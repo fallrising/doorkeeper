@@ -4,7 +4,8 @@ import {getAllServices} from "./dataService.ts";
 
 export async function performHealthCheck() {
   while (true) {
-    const healthChecks = Object.entries(getAllServices()).map(async ([id, service]) => {
+    const services = await getAllServices()
+    const healthChecks = Object.entries(services).map(async ([id, service]) => {
       try {
         if (service.checkType === "http") {
           const response = await fetch(service.checkURL);

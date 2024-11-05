@@ -1,10 +1,10 @@
 import { Context } from "https://deno.land/x/oak@v17.1.3/mod.ts";
 import {getAllServices} from "../services/dataService.ts";
-import { log } from "../utils/logger.ts";
 
-export function getHealthStatus(context: Context) {
+export async function getHealthStatus(context: Context) {
   const serviceName = decodeURIComponent(context.params.service_name || "");
-  const serviceList = Object.entries(getAllServices()).filter(
+  const services = await getAllServices()
+  const serviceList = Object.entries(services).filter(
       ([, service]) => service.name === serviceName
   );
 
@@ -12,10 +12,7 @@ export function getHealthStatus(context: Context) {
 }
 
 export async function getAllHealthStatus(context: Context) {
-  const len = (await getAllServices()).length;
-  log(`get length: ${len}`);
-  const serviceList = Object.entries(getAllServices());
-  const serviceListLength = serviceList.length;
-  log(`serviceListLength: ${serviceListLength}`);
+  const services = await getAllServices()
+  const serviceList = Object.entries(services);
   context.response.body = Object.fromEntries(serviceList);
 }

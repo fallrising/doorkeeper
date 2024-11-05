@@ -1,0 +1,14 @@
+# Ignore .env file containing environment variables
+.env
+
+# Ignore Deno's dependency cache directory
+deno_dir/
+
+# Ignore log files
+*.log
+
+# Ignore test coverage output
+coverage/
+
+# Ignore node_modules if using npm for some reason
+node_modules/

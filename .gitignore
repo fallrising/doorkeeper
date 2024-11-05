@@ -13,3 +13,7 @@ coverage/
 
 # Ignore node_modules if using npm for some reason
 node_modules/
+
+# IDE
+.DS_Store
+.idea/

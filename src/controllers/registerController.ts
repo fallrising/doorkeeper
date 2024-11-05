@@ -3,8 +3,14 @@ import { services } from "../services/healthCheckService.ts";
 
 export async function registerService(context: Context) {
   try {
-    const body = context.request.body();
-    context.assert(body.type === "json", Status.NotAcceptable);
+    const body = await context.request.body.json();
+    if (!body) {
+      context.response.status = 400;
+      context.response.body = { error: "Missing request body" };
+      return;
+    }
+    // get body value
+
     const { ID, Name, Address, Port, Tags, Check } = body;
     if (!ID || !Name || !Address || !Port) {
       context.response.status = 400;

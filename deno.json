@@ -4,8 +4,8 @@
     "strict": true
   },
   "tasks": {
-    "start": "deno run --allow-net --allow-env --allow-read --allow-write src/app.ts",
-    "test": "deno test --allow-net --allow-env --allow-read --allow-write"
+    "start": "deno run --allow-net --allow-env --allow-read --unstable --allow-write src/app.ts",
+    "test": "deno test --allow-net --allow-env --allow-read --unstable --allow-write"
   },
   "fmt": {
     "options": {

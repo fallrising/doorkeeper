@@ -1,6 +1,4 @@
-import { openKv } from "https://deno.land/x/kv/mod.ts";
-
-export const kv = await openKv();
+export const kv = await Deno.openKv();
 
 export async function saveService(id: string, serviceData: Record<string, unknown>) {
     await kv.set(["services", id], serviceData);

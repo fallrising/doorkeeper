@@ -1,4 +1,4 @@
-import { Context } from "https://deno.land/x/oak@v17.1.3/context.ts";
+import { Context } from "https://deno.land/x/oak@v17.1.3/mod.ts";
 import { services } from "../services/healthCheckService.ts";
 
 export async function registerService(context: Context) {
@@ -18,6 +18,7 @@ export async function registerService(context: Context) {
       return;
     }
     services[ID] = {
+      name: Name,
       domain: Address,
       port: Port,
       tags: Tags || [],

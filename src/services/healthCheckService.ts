@@ -1,7 +1,7 @@
 import { HEALTH_CHECK_INTERVAL } from "../config.ts";
 import { log } from "../utils/logger.ts";
 
-export const services: Record<string, { domain: string; port: number; tags: string[]; status: string; checkType: string; checkURL: string; lastChecked: Date | null }> = {};
+export const services: Record<string, { name: string, domain: string; port: number; tags: string[]; status: string; checkType: string; checkURL: string; lastChecked: Date | null }> = {};
 
 export async function performHealthCheck() {
   while (true) {

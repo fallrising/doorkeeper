@@ -1,4 +1,4 @@
-import { Context } from "https://deno.land/x/oak/mod.ts";
+import { Context } from "https://deno.land/x/oak@v17.1.3/mod.ts";
 import { services } from "../services/healthCheckService.ts";
 
 export function unregisterService(context: Context) {

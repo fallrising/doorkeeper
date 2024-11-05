@@ -3,7 +3,8 @@ import { services } from "../services/healthCheckService.ts";
 
 export async function registerService(context: Context) {
   try {
-    const body = await context.request.body({ type: "json" }).value;
+    const result = context.request.body();
+    const body = await result.value;
     const { ID, Name, Address, Port, Tags, Check } = body;
     if (!ID || !Name || !Address || !Port) {
       context.response.status = 400;

@@ -1,10 +1,10 @@
-import { Context } from "https://deno.land/x/oak/mod.ts";
+import { Context } from "https://deno.land/x/oak@v17.1.3/context.ts";
 import { services } from "../services/healthCheckService.ts";
 
 export async function registerService(context: Context) {
   try {
-    const result = context.request.body();
-    const body = await result.value;
+    const body = context.request.body();
+    context.assert(body.type === "json", Status.NotAcceptable);
     const { ID, Name, Address, Port, Tags, Check } = body;
     if (!ID || !Name || !Address || !Port) {
       context.response.status = 400;

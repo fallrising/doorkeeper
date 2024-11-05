@@ -9,8 +9,6 @@ export async function registerService(context: Context) {
       context.response.body = { error: "Missing request body" };
       return;
     }
-    // get body value
-
     const { ID, Name, Address, Port, Tags, Check } = body;
     if (!ID || !Name || !Address || !Port) {
       context.response.status = 400;

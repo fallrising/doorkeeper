@@ -1,3 +1,3 @@
 export function generateServiceId(): string {
-    return crypto.randomUUID();
+  return crypto.randomUUID();
 }

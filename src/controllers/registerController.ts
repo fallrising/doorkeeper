@@ -1,4 +1,4 @@
-import { Context } from "https://deno.land/x/oak@v17.1.3/mod.ts";
+import { Context } from 'https://deno.land/x/oak@v17.1.3/mod.ts';
 import { saveService } from '../services/dataService.ts';
 
 export async function registerService(context: Context) {
@@ -6,14 +6,14 @@ export async function registerService(context: Context) {
     const body = await context.request.body.json();
     if (!body) {
       context.response.status = 400;
-      context.response.body = { error: "Missing request body" };
+      context.response.body = { error: 'Missing request body' };
       return;
     }
 
     const { ID, Name, Address, Port, Tags, Check } = body;
     if (!Name || !Address || !Port) {
       context.response.status = 400;
-      context.response.body = { error: "Missing required fields" };
+      context.response.body = { error: 'Missing required fields' };
       return;
     }
 
@@ -22,20 +22,20 @@ export async function registerService(context: Context) {
       domain: Address,
       port: Port,
       tags: Tags || [],
-      status: "unknown",
-      checkType: Check?.Type || "http",
+      status: 'unknown',
+      checkType: Check?.Type || 'http',
       checkURL: Check?.HTTP || `http://${Address}:${Port}/health`,
-      lastChecked: null
+      lastChecked: null,
     };
 
     const serviceId = await saveService(ID, serviceData);
     context.response.body = {
-      message: "Service registered successfully",
-      serviceId
+      message: 'Service registered successfully',
+      serviceId,
     };
   } catch (error) {
-    console.error("Error registering service:", error);
+    console.error('Error registering service:', error);
     context.response.status = 400;
-    context.response.body = { error: "Invalid request format" };
+    context.response.body = { error: 'Invalid request format' };
   }
 }
